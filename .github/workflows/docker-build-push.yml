@@ -40,19 +40,14 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       # 3. 部署到服务器
+      #
       - name: Deploy to Server
         run: |
           ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
-            # 登录DockerHub（如果服务器需要拉取私有镜像）
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            # 停止并删除旧容器（如果存在）
             docker stop my-python-app || true
             docker rm my-python-app || true
-            # 拉取最新镜像
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
-            # 运行新容器
             docker run -d --name my-python-app -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
-            # 可选：清理未使用的镜像
             docker image prune -f
-          EOF 
-
+          EOF
