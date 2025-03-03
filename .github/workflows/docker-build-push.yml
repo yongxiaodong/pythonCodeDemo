@@ -51,7 +51,7 @@ jobs:
             # 拉取最新镜像
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
             # 运行新容器
-            docker run -d --name my-python-app -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest || {echo "run failed"; exit 1; }
+            docker run -d --name my-python-app -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
             # 可选：清理未使用的镜像
             docker image prune -f
           EOF 
