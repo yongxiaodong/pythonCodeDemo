@@ -48,6 +48,6 @@ jobs:
             docker stop my-python-app || true
             docker rm my-python-app || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
-            docker run -d --name my-python-app -p 5001:5000 ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
+            docker run -d --name my-python-app -p 5001:5554 ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app-new:latest
             docker image prune -f
           EOF
