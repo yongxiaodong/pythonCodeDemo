@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 echo 'Building application...'
-                sh 'pip install -r requirement.txt'    // 安装依赖
+                sh 'pip install -r requirements.txt'    // 安装依赖
             }
         }
 
